@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/common/ie.js"],
+  "sourcesContent": ["// Show an error in Internet Explorer\r\n\r\nfunction show_error() {\r\n    $('#errorcontent').text('Sorry, but Parchment depends on web features unsupported by this browser. Please try a more modern browser.')\r\n    $('#errorpane').show()\r\n}\r\n\r\n$(show_error)"],
+  "mappings": "AAEA,SAASA,GAAa,CAClB,EAAE,eAAe,EAAE,KAAK,6GAA6G,EACrI,EAAE,YAAY,EAAE,KAAK,CACzB,CAEA,EAAEA,CAAU",
+  "names": ["show_error"]
+}
