@@ -6,10 +6,16 @@ from pathlib import Path
 from .models import Game
 from django.conf import settings
 from django.core.files import File
+from django.core.files.base import ContentFile
+from datetime import datetime, timezone
 
 # Create your views here.
 def overview(request):
-    return HttpResponse("Games Overview")
+    game_list = Game.objects.order_by("-datetime_added")
+    return render(request, "overview.html", {"game_list": game_list})
+
+def gameview(request):
+    pass
 
 def scraper(request):
     if request.method == "GET":
@@ -34,8 +40,16 @@ def scraper(request):
                 coverart_file_path: Path = game_folder / ((q['ifdb']['downloads']['links'][0]['url'].rpartition("/")[2]).split(".")[0] + ".png")
 
                 game_folder.mkdir(parents=True, exist_ok=True)
-                game_file_path.write_bytes(game_file_content.content)
-                coverart_file_path.write_bytes(coverart_file_content.content)
+
+                #avoid duplication of files
+                '''print(game_file_path, game_file_path.is_file())
+                print(coverart_file_path, coverart_file_path.is_file())
+                if not game_file_path.is_file():
+                    print("Writing game file")
+                    game_file_path.write_bytes(game_file_content.content)
+                if not coverart_file_path.is_file():
+                    print("Writing cover art file")
+                    coverart_file_path.write_bytes(coverart_file_content.content)'''
                 
                 new_game = Game(
                     tuid = tuid,
@@ -44,12 +58,17 @@ def scraper(request):
                     author = q['bibliographic']['author'],
                     publication_year = q['bibliographic']['firstpublished'],
                     description = q['bibliographic']['description'],
+                    datetime_added = datetime.now(timezone.utc)
                 )
+                print(game_file_path.name, coverart_file_path.name)
+                new_game.game_file.save(game_file_path, ContentFile(game_file_content.content), save=False)
+                new_game.coverart_file.save(coverart_file_path, ContentFile(coverart_file_content.content), save=False)
+                new_game.save()
 
-                with game_file_path.open(mode="rb") as g, coverart_file_path.open(mode="rb") as c:
+                '''with game_file_path.open(mode="rb") as g, coverart_file_path.open(mode="rb") as c:
                     new_game.game_file = File(g, name=game_file_path.name)
                     new_game.coverart_file = File(c, name=coverart_file_path.name)
-                    new_game.save()
+                    new_game.save()'''
         return HttpResponse(str(tuid))
     else:
         Http404()

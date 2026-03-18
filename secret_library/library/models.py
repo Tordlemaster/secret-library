@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime
 
 # Create your models here.
 class Game(models.Model):
@@ -10,3 +11,4 @@ class Game(models.Model):
     description = models.TextField(default="")
     game_file = models.FileField(null=True)
     coverart_file = models.ImageField(null=True)
+    datetime_added = models.DateTimeField(default=datetime.min)

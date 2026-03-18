@@ -1,7 +1,15 @@
-
-<form action="{% url 'scraper' %}" method="post">
-    {% csrf_token %}
-    <label for="tuid">TUID: </label>
-    <input id="tuid" type="text" name="tuid" value="">
-    <input type="submit" value="OK">
-</form>
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <title>Scraper | Secret Library</title>
+    </head>
+    <body>
+        <form action="{% url 'scraper' %}" method="post">
+            {% csrf_token %}
+            <label for="tuid">TUID: </label>
+            <input id="tuid" type="text" name="tuid" value="">
+            <input type="submit" value="OK">
+        </form>
+    </body>
+</html>
