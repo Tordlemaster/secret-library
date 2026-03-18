@@ -7,6 +7,7 @@ from .models import Game
 from django.conf import settings
 from django.core.files import File
 from django.core.files.base import ContentFile
+from django.shortcuts import redirect
 from datetime import datetime, timezone
 
 # Create your views here.
@@ -14,12 +15,17 @@ def overview(request):
     game_list = Game.objects.order_by("-datetime_added")
     return render(request, "overview.html", {"game_list": game_list})
 
-def gameview(request):
-    pass
+def gameview(request, tuid):
+    try:
+        game = Game.objects.get(tuid=tuid)
+        return render(request, 'gameview.html', {"game": game})
+    except:
+        raise Http404(f"No game with TUID {tuid} could be found.")
 
-def scraper(request):
+def scraper(request, msg_class, msg_text):
     if request.method == "GET":
-        return render(request, "scraper.html")
+        return render(request, "scraper.html", {"msg_class": msg_class, "msg_text": msg_text})
+    
     if request.method == "POST":
         tuid = request.POST["tuid"]
         
@@ -29,6 +35,9 @@ def scraper(request):
             q = ifdb_query.json()
             try:
                 Game.objects.get(tuid = tuid)
+                #dirty hack
+                request.method = "GET"
+                return scraper(request, "success", f"{tuid} already present")
             except:
                 game_file_content = requests.get(q['ifdb']['downloads']['links'][0]['url'], stream=True)
                 coverart_file_content = requests.get(q['ifdb']['coverart']['url'], stream=True)
@@ -69,6 +78,12 @@ def scraper(request):
                     new_game.game_file = File(g, name=game_file_path.name)
                     new_game.coverart_file = File(c, name=coverart_file_path.name)
                     new_game.save()'''
-        return HttpResponse(str(tuid))
+                #dirty hack
+                request.method = "GET"
+                return scraper(request, "success", "Success")
+        else:
+            #dirty hack
+            request.method = "GET"
+            return scraper(request, "failure", f"No game {tuid} on IFDB")
     else:
         Http404()

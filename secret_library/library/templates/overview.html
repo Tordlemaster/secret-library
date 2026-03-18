@@ -9,11 +9,14 @@
         {% if game_list %}
             <ul>
                 {% for game in game_list %}
-                    <li><a href="/webplay/{{ game.tuid }}">{{ game.title }}</a></li>
+                    <li><a href="/library/view/{{ game.tuid }}">{{ game.title }}</a></li>
                 {% endfor %}
             </ul>
         {% else %}
             <p>No games are available.</p>
         {% endif %}
+        <p>
+            <li><a href="/library/scraper">Scrape from IFDB</a></li>
+        </p>
     </body>
 </html>

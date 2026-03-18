@@ -3,13 +3,23 @@
     <head>
         <meta charset="utf-8" />
         <title>Scraper | Secret Library</title>
+        <style>
+            .success { color: green;}
+            .failure { color: red;}
+        </style>
     </head>
     <body>
+        <p>
+            <li><a href="/library/overview">Back to overview</a></li>
+        </p>
         <form action="{% url 'scraper' %}" method="post">
             {% csrf_token %}
             <label for="tuid">TUID: </label>
             <input id="tuid" type="text" name="tuid" value="">
             <input type="submit" value="OK">
         </form>
+        <p>
+            <span class="{{ msg_class }}">{{ msg_text }}</span>
+        </p>
     </body>
 </html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="utf-8" />
+        <title>{{ game.title }} | Secret Library</title>
+    </head>
+    <body>
+        <h1>{{ game.title }}</h1>
+        <h2>{{ game.author }}, {{game.publication_year}}</h2>
+        <img
+            src="{{MEDIA_URL}}{{game.coverart_file.name}}"
+            alt="{{game.title}} cover image"
+            width="{{game.coverart_file.width_field}}"
+            height="{{game.coverart_file.height_field}}"
+        />
+        <p>
+            <li><a href="https://ifdb.org/viewgame?id={{ game.tuid }}">IFDB Page</a></li>
+        </p>
+        <p>
+            {{game.description}}
+        </p>
+        <p>
+            <li><a href="/webplay/{{ game.tuid }}">Play in Browser (Parchment)</a></li>
+        </p>
+    </body>
+</html>
