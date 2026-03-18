@@ -16,9 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
+
+from django.shortcuts import redirect
+
 
 urlpatterns = [
+    path("", lambda request: redirect("overview")),
+    path("library/", include("library.urls")),
     path("webplay/", include("webplay.urls")),
     path("save_api/", include("save_api.urls")),
     path('admin/', admin.site.urls),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    #print(urlpatterns)

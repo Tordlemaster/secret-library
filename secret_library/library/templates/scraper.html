@@ -1,0 +1,7 @@
+
+<form action="{% url 'scraper' %}" method="post">
+    {% csrf_token %}
+    <label for="tuid">TUID: </label>
+    <input id="tuid" type="text" name="tuid" value="">
+    <input type="submit" value="OK">
+</form>
