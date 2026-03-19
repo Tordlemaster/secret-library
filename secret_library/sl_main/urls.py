@@ -21,9 +21,12 @@ from django.conf.urls.static import static
 
 from django.shortcuts import redirect
 
+from . import views
+
 
 urlpatterns = [
-    path("", lambda request: redirect("overview")),
+    path("", views.default_view, name="default"),
+    path("account/", include("account.urls")),
     path("library/", include("library.urls")),
     path("webplay/", include("webplay.urls")),
     path("save_api/", include("save_api.urls")),

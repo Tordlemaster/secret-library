@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import Http404
 from library.models import Game
+from django.contrib.auth.decorators import login_required
 
 from django.conf import settings
 
 # Create your views here.
+
+@login_required
 def index(request, tuid):
     try:
         game = Game.objects.get(tuid=tuid)

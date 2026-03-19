@@ -2,21 +2,20 @@
 <html lang="en-US">
     <head>
         <meta charset="utf-8" />
-        <title>Scraper | Secret Library</title>
+        <title>Login | Secret Library</title>
         <style>
             .success { color: green;}
             .error { color: red;}
         </style>
     </head>
     <body>
-        {% include 'account_header.html' %}
-        <p>
-            <li><a href="{% url 'overview' %}">Back to overview</a></li>
-        </p>
-        <form action="{% url 'scraper' %}" method="post">
+        <form action="{% url 'login' %}" method="post">
             {% csrf_token %}
-            <label for="tuid">TUID: </label>
-            <input id="tuid" type="text" name="tuid" value="">
+            <label for="username">Username: </label>
+            <input id="username" type="text" name="username" value="">
+            <br>
+            <label for="password">Password: </label>
+            <input id="password" type="text" name="password" value="">
             <input type="submit" value="OK">
         </form>
         {% for message in messages %}

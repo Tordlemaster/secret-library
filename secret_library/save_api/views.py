@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, JsonResponse
+from django.contrib.auth.decorators import login_required
 
 import save_api.pybase32k as pybase32k
 
@@ -10,18 +11,22 @@ import shutil
 import json
 
 # Create your views here.
+
+@login_required
 def api(request):
     if request.method == "POST":
         body = json.loads(request.body)
         action = body.get('action')
         print(f"Save API Request: {action}, {body}")
+        usr_base_dir = Path(f"./././save_files/{request.user.pk}")
+        print(usr_base_dir)
         match action:
             case "get_all_user_data":
                 #return HttpResponse("{}")
                 pybase32k.build_lookup()
                 filesystem_dict = dict()
                 dialog_metadata = dict()
-                for dirpaths, dirnames, filenames in os.walk(Path("./././save_files/")):
+                for dirpaths, dirnames, filenames in os.walk(usr_base_dir):
                     #print("new iteration")
                     for f in filenames:
                         filepath = os.path.join(dirpaths, f)
@@ -45,11 +50,12 @@ def api(request):
                     for file_path in data.keys():
                         times = data[file_path]
                         #print(int(times.get('atime'))/1000, int(times.get('mtime'))/1000)
-                        os.utime(Path("./././save_files" + file_path), (int(times.get('atime'))/1000, int(times.get('mtime'))/1000))
+                        print((int(int(times.get('atime'))/1000), int(int(times.get('mtime'))/1000)))
+                        os.utime(usr_base_dir / file_path.lstrip('/usr/'), (int(int(times.get('atime'))/1000), int(int(times.get('mtime'))/1000)))
                 else:
                     pybase32k.build_lookup()
                     file_content = pybase32k.decode(body.get('value'))
-                    file_path = Path("./././save_files" + body.get('key'))
+                    file_path = usr_base_dir / body.get('key').lstrip('/usr/')
                     file_path.parent.mkdir(parents=True, exist_ok=True)
                     file_path.write_bytes(file_content)
                 return HttpResponse("{}")
@@ -57,11 +63,11 @@ def api(request):
             case "remove":
                 fp = body.get('key');
                 try:
-                    os.remove(Path("./././save_files" + fp))
+                    os.remove(usr_base_dir / fp.lstrip('/usr/'))
                     if fp[-4:] == ".dir":
-                        shutil.rmtree(Path("./././save_files" + fp[:-4]))
-                except e:
-                    pass
+                        shutil.rmtree(usr_base_dir / fp[:-4].lstrip('/usr/'))
+                except Exception as e:
+                    print(e)
                 return HttpResponse("{}")
             
         raise Http404("Save API unimplemented")

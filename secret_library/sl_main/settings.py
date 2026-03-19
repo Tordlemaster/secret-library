@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'library.apps.LibraryConfig',
     'save_api.apps.SaveApiConfig',
     'webplay.apps.WebplayConfig',
+    'account.apps.AccountConfig',
     #'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -127,6 +128,8 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = 'media/'
+
+LOGIN_URL = 'account/login'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

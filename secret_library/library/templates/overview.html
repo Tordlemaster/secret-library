@@ -5,6 +5,7 @@
         <title>Overview | Secret Library</title>
     </head>
     <body>
+        {% include 'account_header.html' %}
         <h1>Games Overview</h1>
         {% if game_list %}
             <ul>
@@ -16,7 +17,7 @@
             <p>No games are available.</p>
         {% endif %}
         <p>
-            <li><a href="/library/scraper">Scrape from IFDB</a></li>
+            <li><a href="{% url 'scraper' %}">Scrape from IFDB</a></li>
         </p>
     </body>
 </html>
