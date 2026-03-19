@@ -1,5 +1,8 @@
 from django.db import models
 from datetime import datetime
+from django.core.files.storage import FileSystemStorage
+
+overwrite_storage = FileSystemStorage(allow_overwrite=True)
 
 # Create your models here.
 class Game(models.Model):
@@ -9,6 +12,6 @@ class Game(models.Model):
     author = models.CharField(max_length=100)
     publication_year = models.SmallIntegerField(null=True)
     description = models.TextField(default="")
-    game_file = models.FileField(null=True)
-    coverart_file = models.ImageField(null=True)
+    game_file = models.FileField(null=True, storage=overwrite_storage)
+    coverart_file = models.ImageField(null=True, storage=overwrite_storage)
     datetime_added = models.DateTimeField(default=datetime.min)

@@ -9,6 +9,8 @@ from django.core.files import File
 from django.core.files.base import ContentFile
 from django.shortcuts import redirect
 from datetime import datetime, timezone
+import html
+from django.utils.html import strip_tags
 
 # Create your views here.
 def overview(request):
@@ -66,7 +68,7 @@ def scraper(request, msg_class, msg_text):
                     title = q['bibliographic']['title'],
                     author = q['bibliographic']['author'],
                     publication_year = q['bibliographic']['firstpublished'],
-                    description = q['bibliographic']['description'],
+                    description = strip_tags(html.unescape(q['bibliographic']['description'])),
                     datetime_added = datetime.now(timezone.utc)
                 )
                 print(game_file_path.name, coverart_file_path.name)
