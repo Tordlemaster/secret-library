@@ -55,6 +55,13 @@ def scraper(request):
                     game_file_path: Path = game_folder / q['ifdb']['downloads']['links'][0]['url'].rpartition("/")[2]
                     coverart_file_path: Path = game_folder / ((q['ifdb']['downloads']['links'][0]['url'].rpartition("/")[2]).split(".")[0] + ".png")
 
+                    tuid = tuid
+                    ifid = q['identification']['ifids'][0]
+                    title = q['bibliographic']['title']
+                    author = q['bibliographic']['author']
+                    publication_year = q['bibliographic']['firstpublished'][0:4]
+                    description = strip_tags(html.unescape(q['bibliographic']['description']))
+                    datetime_added = datetime.now(timezone.utc)
                     game_folder.mkdir(parents=True, exist_ok=True)
 
                     #avoid duplication of files
@@ -69,12 +76,12 @@ def scraper(request):
                     
                     new_game = Game(
                         tuid = tuid,
-                        ifid = q['identification']['ifids'][0],
-                        title = q['bibliographic']['title'],
-                        author = q['bibliographic']['author'],
-                        publication_year = q['bibliographic']['firstpublished'][0:4],
-                        description = strip_tags(html.unescape(q['bibliographic']['description'])),
-                        datetime_added = datetime.now(timezone.utc)
+                        ifid = ifid,
+                        title = title,
+                        author = author,
+                        publication_year = publication_year,
+                        description = description,
+                        datetime_added = datetime_added
                     )
                     print(game_file_path.name, coverart_file_path.name)
                     new_game.game_file.save(game_file_path, ContentFile(game_file_content.content), save=False)
