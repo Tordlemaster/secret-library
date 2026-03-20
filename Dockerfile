@@ -1,21 +1,20 @@
-FROM python:3.13
+FROM python:3.13-slim
 
-ENV PYTHONDONTWRITEBYTECODE=1
-#Prevents Python from buffering stdout and stderr
-ENV PYTHONUNBUFFERED=1 
-
-RUN pip install --no-cache-dir -r requirements.txt
-
-# update packages
-RUN apt-get -qq update
-RUN apt-get install --yes apache2 apache2-dev
-RUN pip install mod_wsgi
 
 RUN mkdir /code
 WORKDIR /code
 
 COPY . /code/
 
+ENV PYTHONDONTWRITEBYTECODE=1
+#Prevents Python from buffering stdout and stderr
+ENV PYTHONUNBUFFERED=1 
+
+RUN pip install --no-cache-dir -r ./requirements.txt
+
+
 EXPOSE 8000
 
-CMD mod_wsgi-express start-server /secret_library/sl_main/wsgi.py --user www-data --group www-data
+WORKDIR /code/secret_library
+
+CMD gunicorn sl_main.wsgi:application --bind 0.0.0.0:8000 --workers 3
