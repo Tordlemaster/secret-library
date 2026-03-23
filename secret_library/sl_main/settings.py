@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-pd1mksx&e=v(x7)=jy6g8v4td70=+0t(12v@%mg&gka$1xdzxn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["truenas.local", "192.168.1.161"]
 
 
 # Application definition
@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'sl_main.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db/db.sqlite3',
     }
 }
 
@@ -126,10 +126,15 @@ STATICFILES_DIRS = [
     #BASE_DIR / 'gamefiles'
 ]
 
-MEDIA_ROOT = BASE_DIR / "media"
+STATIC_ROOT = BASE_DIR / "static"
+
+#M_ROOT = Path("/sl_media")
+MEDIA_ROOT = Path("sl_media/media")
 MEDIA_URL = 'media/'
 
 LOGIN_URL = 'account/login'
+
+SAVE_FILE_PATH = Path("sl_media/save_files")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

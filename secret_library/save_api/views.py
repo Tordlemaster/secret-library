@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 
 import save_api.pybase32k as pybase32k
 
@@ -18,7 +19,7 @@ def api(request):
         body = json.loads(request.body)
         action = body.get('action')
         print(f"Save API Request: {action}, {body}")
-        usr_base_dir = Path(f"./././save_files/{request.user.pk}")
+        usr_base_dir = settings.SAVE_FILE_PATH / str(request.user.pk)
         print(usr_base_dir)
         match action:
             case "get_all_user_data":
@@ -30,7 +31,7 @@ def api(request):
                     #print("new iteration")
                     for f in filenames:
                         filepath = os.path.join(dirpaths, f)
-                        trimmed_filepath = filepath[filepath.find('\\'):].replace("\\", "/")
+                        trimmed_filepath = "/usr" + filepath.removeprefix(str(usr_base_dir)).replace("\\", "/")
                         print(filepath, trimmed_filepath)
                         dialog_metadata[trimmed_filepath] = {
                             "atime": int(os.path.getatime(filepath)*1000.0),
@@ -51,11 +52,11 @@ def api(request):
                         times = data[file_path]
                         #print(int(times.get('atime'))/1000, int(times.get('mtime'))/1000)
                         print((int(int(times.get('atime'))/1000), int(int(times.get('mtime'))/1000)))
-                        os.utime(usr_base_dir / file_path.lstrip('/usr/'), (int(int(times.get('atime'))/1000), int(int(times.get('mtime'))/1000)))
+                        os.utime((usr_base_dir / file_path.removeprefix('/usr/')).resolve(), (int(int(times.get('atime'))/1000), int(int(times.get('mtime'))/1000)))
                 else:
                     pybase32k.build_lookup()
                     file_content = pybase32k.decode(body.get('value'))
-                    file_path = usr_base_dir / body.get('key').lstrip('/usr/')
+                    file_path = usr_base_dir / body.get('key').removeprefix('/usr/')
                     file_path.parent.mkdir(parents=True, exist_ok=True)
                     file_path.write_bytes(file_content)
                 return HttpResponse("{}")
@@ -63,9 +64,9 @@ def api(request):
             case "remove":
                 fp = body.get('key');
                 try:
-                    os.remove(usr_base_dir / fp.lstrip('/usr/'))
+                    os.remove(usr_base_dir / fp.removeprefix('/usr/'))
                     if fp[-4:] == ".dir":
-                        shutil.rmtree(usr_base_dir / fp[:-4].lstrip('/usr/'))
+                        shutil.rmtree(usr_base_dir / fp[:-4].removeprefix('/usr/'))
                 except Exception as e:
                     print(e)
                 return HttpResponse("{}")

@@ -51,7 +51,7 @@ def scraper(request):
                     game_file_content.raise_for_status()
                     coverart_file_content.raise_for_status()
 
-                    game_folder: Path = settings.MEDIA_ROOT / f"gamedata/{tuid}"
+                    game_folder: Path = Path(f"gamedata/{tuid}")
                     game_file_path: Path = game_folder / q['ifdb']['downloads']['links'][0]['url'].rpartition("/")[2]
                     coverart_file_path: Path = game_folder / ((q['ifdb']['downloads']['links'][0]['url'].rpartition("/")[2]).split(".")[0] + ".png")
 

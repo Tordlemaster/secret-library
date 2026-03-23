@@ -12,9 +12,21 @@ ENV PYTHONUNBUFFERED=1
 
 RUN pip install --no-cache-dir -r ./requirements.txt
 
+RUN mkdir /code/secret_library/sl_media
+RUN mkdir /code/secret_library/sl_media/save_files
+RUN mkdir /code/secret_library/sl_media/media
+RUN mkdir /code/secret_library/sl_media/media/gamedata
+RUN mkdir /code/secret_library/db
 
-EXPOSE 8000
+#RUN chown -R 568:568 /code/secret_library/sl_media
+#RUN chown -R 568:568 /code/secret_library/db
+
+#USER 568:568
 
 WORKDIR /code/secret_library
 
-CMD gunicorn sl_main.wsgi:application --bind 0.0.0.0:8000 --workers 3
+EXPOSE 8000
+
+CMD python3 manage.py migrate && python3 manage.py loaddata sl_main/fixtures/users.json && gunicorn sl_main.wsgi:application --bind 0.0.0.0:8000 --workers 3
+#gunicorn sl_main.wsgi:application --bind 0.0.0.0:8000 --workers 3
+#python3 manage.py runserver 0.0.0.0:8000
