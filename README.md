@@ -1,7 +1,7 @@
 # secret-library
 ![secret-library](./logo.svg)
 
-secret-library is a self-hosted interactive fiction library manager built on Django. Games can be scraped individually from the [Interactive Fiction Database (IFDB)](https://ifdb.org) and played in the browser with a modified version of [Parchment](https://github.com/curiousdannii/parchment) which supports saving over a web API. Save files are managed separately for each user.
+secret-library is a self-hosted interactive fiction library and save file manager built on Django. Games can be scraped individually from the [Interactive Fiction Database (IFDB)](https://ifdb.org) and played in the browser with a modified version of [Parchment](https://github.com/curiousdannii/parchment) which supports saving over a web API. Save files are managed separately for each user.
 
 Contributions are welcome!
 
