@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="194.26891mm"
+   height="21.213219mm"
+   viewBox="0 0 194.26891 21.213219"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.6471871"
+     inkscape:cx="264.99721"
+     inkscape:cy="-48.264097"
+     inkscape:window-width="3840"
+     inkscape:window-height="2066"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="64.352127"
+       y="58.281174"
+       width="545.77893"
+       height="234.94598"
+       id="rect1" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-5.4512434,-13.489268)">
+    <text
+       xml:space="preserve"
+       transform="matrix(1.2159807,0,0,1.2159807,-297.4946,-57.900503)"
+       id="text1"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:18.6667px;line-height:1;font-family:Consolas;-inkscape-font-specification:'Consolas, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect1);display:inline;fill:#2ee500;fill-opacity:1;stroke:none;stroke-width:0.501324;stroke-linejoin:bevel;stroke-dasharray:1.00265;stroke-opacity:1"><tspan
+         x="265.39994"
+         y="72.144556"
+         id="tspan3"><tspan
+           style="stroke-width:0.190866"
+           id="tspan2">secret-library</tspan></tspan></text>
+    <path
+       id="rect2-52"
+       style="fill:#2fe300;fill-opacity:1;stroke:none;stroke-width:0.6096;stroke-linejoin:bevel;stroke-dasharray:1.21921;stroke-opacity:1"
+       d="M -1.1128586 17.963847 L -6.1127302 17.964213 L -6.1127302 26.657258 L -9.4777684 18.533883 L -10.401519 18.91683 L -7.5367234 25.833264 L -12.830383 20.539605 L -13.537446 21.246669 L -8.2441525 26.539963 L -15.160221 23.675533 L -15.542803 24.598918 L -7.4194276 27.963956 L -16.112473 27.963956 L -16.112473 32.964193 L -6.1127302 32.964193 L -3.6126117 30.464074 L -1.1124932 27.963956 L -1.1128586 17.963847 z "
+       transform="rotate(-45)" />
+  </g>
+</svg>
