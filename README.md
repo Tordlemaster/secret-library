@@ -39,5 +39,5 @@ This project is still in its early stages, and while the central functionality o
           - /path/to/media/folder:/app/secret-library/sl_media
           - /path/to/database/folder:/app/secret-library/db
 
-##Build Instructions
-To build the modified version of Parchment developed for secret-library, replace the "asyncglk" submodule of Parchment with 
+## Build Instructions
+To build the modified version of Parchment developed for secret-library, replace the "asyncglk" submodule of Parchment with [asyncglk-sl](https://github.com/Tordlemaster/asyncglk-sl). Then build Parchment as instructed. To copy the appropriate files over, run the included transfer.sh script from the root directory of Parchment. Make sure to set the value of the SECRET_LIBRARY_ROOT environment variable to the absolute filepath of the root directory of secret-library (ending with a slash) first.
