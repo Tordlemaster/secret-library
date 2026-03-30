@@ -124,10 +124,10 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 STATICFILES_DIRS = [
-    #BASE_DIR / 'gamefiles'
+    BASE_DIR / 'static'
 ]
 
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 #M_ROOT = Path("/sl_media")
 MEDIA_ROOT = Path("sl_media/media")

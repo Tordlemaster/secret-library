@@ -9,19 +9,22 @@
         </style>
     </head>
     <body>
-        <form action="{% url 'login' %}" method="post">
-            {% csrf_token %}
-            <label for="username">Username: </label>
-            <input id="username" type="text" name="username" value="">
-            <br>
-            <label for="password">Password: </label>
-            <input id="password" type="password" name="password" value="">
-            <input type="submit" value="OK">
-        </form>
-        {% for message in messages %}
-            <p class="{{ message.tags }}">
-                {{ message }}
-            </p>
-        {% endfor %}
+        {% include 'header.html' %}
+        <div class="page-body">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <label for="username">Username: </label>
+                <input id="username" type="text" name="username" value="">
+                <br>
+                <label for="password">Password: </label>
+                <input id="password" type="password" name="password" value="">
+                <input type="submit" value="OK">
+            </form>
+            {% for message in messages %}
+                <p class="{{ message.tags }}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
     </body>
 </html>
