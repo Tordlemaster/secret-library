@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en-US">
     <head>
         <meta charset="utf-8" />
@@ -6,18 +7,36 @@
     </head>
     <body>
         {% include 'account_header.html' %}
-        <h1>Games Overview</h1>
-        {% if game_list %}
-            <ul>
-                {% for game in game_list %}
-                    <li><a href="/library/view/{{ game.tuid }}">{{ game.title }}</a></li>
-                {% endfor %}
-            </ul>
-        {% else %}
-            <p>No games are available.</p>
-        {% endif %}
-        <p>
-            <li><a href="{% url 'scraper' %}">Scrape from IFDB</a></li>
-        </p>
+        <div class="page-body">
+            <h1>Games Overview</h1>
+            {% if game_list %}
+                <ul>
+                    {% for game in game_list %}
+                    <article class="game-listing">
+                        <div>
+                            <img
+                                src="{{MEDIA_URL}}{{game.coverart_file.name}}"
+                                alt="{{game.title}} cover image"
+                                width="{{game.coverart_file.width_field}}"
+                                height="{{game.coverart_file.height_field}}"
+                            />
+                        </div>
+                        <div>
+                            <a href="/library/view/{{ game.tuid }}">{{ game.title }}</a>
+                            <br>
+                            by {{ game.author }}
+                            <br>
+                            {{ game.publication_year }}
+                        </div>
+                    </article>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No games are available.</p>
+            {% endif %}
+            <p>
+                <a href="{% url 'scraper' %}">Scrape from IFDB</a>
+            </p>
+        </div>
     </body>
 </html>

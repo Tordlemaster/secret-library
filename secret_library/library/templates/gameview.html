@@ -6,22 +6,24 @@
     </head>
     <body>
         {% include 'account_header.html' %}
-        <h1>{{ game.title }}</h1>
-        <h2>{{ game.author }}, {{game.publication_year}}</h2>
-        <img
-            src="{{MEDIA_URL}}{{game.coverart_file.name}}"
-            alt="{{game.title}} cover image"
-            width="{{game.coverart_file.width_field}}"
-            height="{{game.coverart_file.height_field}}"
-        />
-        <p>
-            <li><a href="https://ifdb.org/viewgame?id={{ game.tuid }}">IFDB Page</a></li>
-        </p>
-        <p>
-            {{ game.description }}
-        </p>
-        <p>
-            <li><a href="/webplay/{{ game.tuid }}">Play in Browser (Parchment)</a></li>
-        </p>
+        <div class="game-view">
+            <div class="game-view-column">
+                <h1>{{ game.title }}</h1>
+                <h2>{{ game.author }}, {{game.publication_year}}</h2>
+                <p>
+                    <a href="https://ifdb.org/viewgame?id={{ game.tuid }}">IFDB Page</a>
+                </p>
+                <p>
+                    {{ game.description }}
+                </p>
+                <p>
+                    <a href="/webplay/{{ game.tuid }}">Play in Browser (Parchment)</a>
+                </p>
+            </div>
+            <img class="game-view-column"
+                src="{{MEDIA_URL}}{{game.coverart_file.name}}"
+                alt="{{game.title}} cover image"
+            />
+        </div>
     </body>
 </html>

@@ -10,19 +10,21 @@
     </head>
     <body>
         {% include 'account_header.html' %}
-        <p>
-            <li><a href="{% url 'overview' %}">Back to overview</a></li>
-        </p>
-        <form action="{% url 'scraper' %}" method="post">
-            {% csrf_token %}
-            <label for="tuid">TUID: </label>
-            <input id="tuid" type="text" name="tuid" value="">
-            <input type="submit" value="OK">
-        </form>
-        {% for message in messages %}
-            <p class="{{ message.tags }}">
-                {{ message }}
+        <div class="page-body">
+            <p>
+                <a href="{% url 'overview' %}">Back to overview</a>
             </p>
-        {% endfor %}
+            <form action="{% url 'scraper' %}" method="post">
+                {% csrf_token %}
+                <label for="tuid">TUID: </label>
+                <input id="tuid" type="text" name="tuid" value="">
+                <input type="submit" value="OK">
+            </form>
+            {% for message in messages %}
+                <p class="{{ message.tags }}">
+                    {{ message }}
+                </p>
+            {% endfor %}
+        </div>
     </body>
 </html>

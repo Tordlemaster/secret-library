@@ -1,0 +1,56 @@
+:root {
+    color-scheme: light dark;
+}
+
+header {
+    color: light-dark(#000000, #ffffff);
+    background: linear-gradient(0.25turn, light-dark(hsl(108, 100%, 25%), hsl(41, 100%, 25%)), light-dark(#efedea, #000000));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1%;
+    font-family: Consolas, monospace;
+    @media (prefers-color-scheme: dark) {
+        img {
+            filter: brightness(0%) saturate(100%) invert(71%) sepia(89%) saturate(1898%) hue-rotate(358deg) brightness(99%) contrast(105%);
+        }
+    }
+}
+
+body {
+    padding: 0%;
+    color: light-dark(#000000, #ffffff);
+    background-color: light-dark(#efedea, #000000);
+    font-family: Consolas, monospace;
+    display: block;
+    align-items: center;
+}
+
+.page-body {
+    padding: 1%;
+}
+
+article.game-listing {
+    img {
+        width: 4em;
+        height: auto;
+    }
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    font-size: larger;
+    padding-block: 1%;
+}
+
+.game-view {
+    align-self: center;
+    display: flex;
+    justify-content: center;
+    margin: 2%;
+}
+
+.game-view-column {
+    width: 30em;
+    height: auto;
+    margin-inline: 1%;
+}

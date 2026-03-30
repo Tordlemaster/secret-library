@@ -1,3 +1,4 @@
 media/
 save_files/
 secret_library/db.sqlite3
+db/

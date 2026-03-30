@@ -1,3 +1,13 @@
-<p>
-    Logged in as {{ username }} | <a href="{% url 'logout' %}">Log out</a>
-</p>
+<header>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'assets/library.css' %}" />
+    <div>
+        <img
+            src="{% static 'assets/logo.svg' %}"
+            alt="secret-library"
+        />
+    </div>
+    <div>
+        Logged in as {{ username }} | <a href="{% url 'logout' %}">Log out</a>
+    </div>
+</header>
